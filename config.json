@@ -4,8 +4,37 @@
     "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION": "last",
     "i18n": "CN",
-    "indexStyle":"body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
-#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 20px;}
-#footer {margin-top:64px; text-align: center;font-size: small;}"
+    "indexStyle":"module.exports = {
+  // 其他配置不变...
+  indexStyle: `
+    /* 浅色模式背景图 */
+    [data-color-mode="light"] body {
+      background-image: url("https://你的图片链接/light-bg.jpg") !important;
+      background-size: cover !important;       /* 图片自适应容器 */
+      background-repeat: no-repeat !important; /* 不重复平铺 */
+      background-attachment: fixed !important; /* 滚动时背景固定 */
+      background-position: center !important;  /* 图片居中 */
+      background-color: #f0fdf4 !important;    /* 图片加载失败时的备用色（浅绿） */
+    }
+
+    /* 深色模式背景图 */
+    [data-color-mode="dark"] body {
+      background-image: url("https://你的图片链接/dark-bg.jpg") !important;
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
+      background-attachment: fixed !important;
+      background-position: center !important;
+      background-color: #065f46 !important;    /* 图片加载失败时的备用色（深绿） */
+    }
+
+    /* 可选：让容器半透明，透出背景图 */
+    #header, #content, #footer {
+      background-color: rgba(220, 252, 231, 0.9) !important;
+    }
+    [data-color-mode="dark"] #header, [data-color-mode="dark"] #content, [data-color-mode="dark"] #footer {
+      background-color: rgba(4, 120, 87, 0.9) !important;
+    }
+  `,
+};"
     "indexScript":""
 }
