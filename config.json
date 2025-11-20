@@ -5,5 +5,6 @@
     "GMEEK_VERSION": "last",
     "i18n": "CN",
     "customCss": ""
-   "indexStyle": ""
+   "style": "<style>#postBody{font-size:20px} [data-color-mode='light'] body { background-color: #f0fdf4 !important; } [data-color-mode='dark'] body { background-color: #065f46 !important; } #header, #content, #footer { background-color: #dcfce7 !important; } [data-color-mode='dark'] #header, [data-color-mode='dark'] #content, [data-color-mode='dark'] #footer { background-color: #047857 !important; } .listTitle { color: #065f46 !important; } .Label { background-color: #10b981 !important; color: white !important; }</style>",
+   "script": "<script async src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'></script>"
 }
