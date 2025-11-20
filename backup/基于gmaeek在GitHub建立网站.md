@@ -5,7 +5,7 @@ https://github.com/Meekdai/Gmeek
 
 <img width="1609" height="882" alt="Image" src="https://github.com/user-attachments/assets/433618d6-7295-4f37-8846-6259c962c059" />
 
-创建议题(任意标签)
+**创建议题(任意标签)**
 
 <img width="1363" height="846" alt="Image" src="https://github.com/user-attachments/assets/8efb6481-0e9a-442b-9023-6d2ca3831eb4" />
 
@@ -17,6 +17,7 @@ https://github.com/Meekdai/Gmeek
 **简单修改**
 修改config文件,在action处,build Gmeek处,运行工作流程处,运行工作流程.
 即可完成修改相关配置.
+
 **关于评论区**
 很简单的一个评论区,
 去网站安装:
