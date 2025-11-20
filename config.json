@@ -4,7 +4,57 @@
     "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION": "last",
     "i18n": "CN",
-    "customCss": ""
-   "style": "<style>#postBody{font-size:20px} [data-color-mode='light'] body { background-color: #f0fdf4 !important; } [data-color-mode='dark'] body { background-color: #065f46 !important; } #header, #content, #footer { background-color: #dcfce7 !important; } [data-color-mode='dark'] #header, [data-color-mode='dark'] #content, [data-color-mode='dark'] #footer { background-color: #047857 !important; } .listTitle { color: #065f46 !important; } .Label { background-color: #10b981 !important; color: white !important; }</style>"
-  
+    "indexStyle":"/* 浅色模式背景图片（替换为你的图片URL） */
+[data-color-mode="light"] body {
+    background-image: url("https://example.com/light-bg.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-color: #f0fdf4 !important; /* 背景图加载失败时的 fallback 色 */
+}
+
+/* 深色模式背景图片（替换为你的图片URL） */
+[data-color-mode="dark"] body {
+    background-image: url("https://example.com/dark-bg.jpg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-color: #065f46 !important; /* 背景图加载失败时的 fallback 色 */
+}
+
+/* 容器半透明（可选，让背景图更清晰） */
+#header, #content, #footer {
+    background-color: rgba(220, 252, 231, 0.9) !important;
+}
+[data-color-mode="dark"] #header, [data-color-mode="dark"] #content, [data-color-mode="dark"] #footer {
+    background-color: rgba(4, 120, 87, 0.9) !important;
+}",
+    "indexScript":"// 背景图片加载失败降级处理（确保页面不显示空白）
+document.addEventListener('DOMContentLoaded', function() {
+    const checkBgImage = () => {
+        const body = document.body;
+        const mode = document.documentElement.getAttribute('data-color-mode');
+        const bgImage = window.getComputedStyle(body).backgroundImage;
+        
+        // 若背景图加载失败（显示 none 或 url("")），强制显示 fallback 背景色
+        if (bgImage === 'none' || bgImage.includes('url("")')) {
+            if (mode === 'dark') {
+                body.style.backgroundColor = '#065f46 !important';
+            } else {
+                body.style.backgroundColor = '#f0fdf4 !important';
+            }
+        }
+    };
+
+    // 初始加载检查 + 主题切换时重新检查
+    checkBgImage();
+    const themeSwitchBtn = document.querySelector('[onclick="modeSwitch()"]');
+    if (themeSwitchBtn) {
+        themeSwitchBtn.addEventListener('click', () => {
+            setTimeout(checkBgImage, 100); // 延迟检查，确保主题切换完成
+        });
+    }
+});"
 }
