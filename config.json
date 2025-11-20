@@ -4,6 +4,6 @@
     "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION": "last",
     "i18n": "CN",
-    "customCss": "",
-   "indexStyle": "[data-color-mode=\"light\"] body { background-color: #f0fdf4 !important; } [data-color-mode=\"dark\"] body { background-color: #064e3b !important; } #header, #content, #footer { background-color: #dcfce7 !important; } [data-color-mode=\"dark\"] #header, [data-color-mode=\"dark\"] #content, [data-color-mode=\"dark\"] #footer { background-color: #134e4a !important; } .listTitle { color: #166534 !important; } .Label { background-color: #22c55e !important; color: white !important; }"
+    "customCss": ""
+   "indexStyle": ""
 }
