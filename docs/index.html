@@ -5,721 +5,183 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg">
     
-    <meta name="description" content="观 - 记录技术与生活的思考">
-    <meta property="og:title" content="观">
-    <meta property="og:description" content="观 - 记录技术与生活的思考">
-    <meta property="og:type" content="blog">
-    <meta property="og:url" content="https://mouugw.github.io">
-    <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
-    <title>观</title>
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="描述">
+<meta property="og:title" content="观">
+<meta property="og:description" content="描述">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://mouugw.github.io">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>观</title>
 
-    <style>
-        /* 基础色彩变量（适配深浅主题） */
-        :root {
-            --primary: #0969da; /* 主色：GitHub蓝 */
-            --primary-light: #1976d2;
-            --primary-dark: #05386b;
-            --secondary: #6e7681; /* 辅助色：灰色 */
-            --accent: #ff6b6b; /* 强调色：浅红（用于RSS、高亮） */
-            --success: #10b981; /* 成功色：绿色 */
-            --warning: #f59e0b; /* 警告色：橙色 */
-            --bg-primary: #ffffff; /* 浅色背景 */
-            --bg-secondary: #f6f8fa; /* 浅色次要背景 */
-            --bg-tertiary: #f0f2f5; /* 浅色三级背景 */
-            --text-primary: #1f2328; /* 主要文本 */
-            --text-secondary: #6e7681; /* 次要文本 */
-            --text-tertiary: #949da9; /* tertiary文本 */
-            --border-primary: #e1e4e8; /* 主要边框 */
-            --border-secondary: #d1d5da; /* 次要边框 */
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
-            --shadow: 0 4px 8px rgba(0， 0， 0， 0.06);
-            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.08);
-            --radius-sm: 4px;
-            --radius: 8px;
-            --radius-lg: 12px;
-            --transition-fast: 0.2s ease;
-            --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        /* 深色主题变量覆盖 */
-        [data-color-mode="dark"] {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #f0f0f0;
-            --text-secondary: #c9d1d9;
-            --text-tertiary: #8b949e;
-            --border-primary: #30363d;
-            --border-secondary: #2a2f36;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        /* 全局重置与基础样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-width: 200px;
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 30px;
-            font-size: 16px;
-            font-family: -apple-system， BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-            line-height: 1.65;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: background-color var(--transition), color var(--transition);
-            opacity: 0;
-            animation: fade-in 0.6s ease forwards;
-        }
-
-        /* 页面渐入效果 */
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 链接样式统一 */
-        a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color var(--transition), transform var(--transition);
-        }
-        a:hover {
-            color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        /* 按钮样式优化 */
-        .btn {
-            transition: all var(--transition);
-        }
-        .btn-invisible {
-            color: var(--text-secondary);
-            background-color: transparent;
-            border: none;
-        }
-        .btn-invisible:hover {
-            color: var(--primary);
-            background-color: var(--bg-secondary);
-            transform: translateY(-1px);
-        }
-        .circle {
-            border-radius: 50% !important;
-        }
-
-        /* 头部样式 */
-        #header {
-            display: flex;
-            align-items: center;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-primary);
-            position: relative;
-        }
-
-        /* 头像美化（增加渐变边框） */
-        .avatar {
-            width: 72px;
-            height: 72px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            background: linear-gradient(135deg, var(--primary), var(--accent)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            box-shadow: var(--shadow);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .avatar:hover {
-            transform: scale(1.08) rotate(360deg);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* 标题样式 */
-        #header h1 {
-            display: flex;
-            align-items: center;
-        }
-        #header h1 a {
-            font-size: 42px;
-            font-family: "Monaco", "Menlo", monospace;
-            margin-left: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-            background: linear-gradient(90deg， var(--primary)， var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 头部右侧按钮组 */
-        。title-right {
-            display: flex;
-            margin-left: auto;
-            gap: 8px;
-        }
-        。title-right button,
-        。title-right a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            padding: 0;
-        }
-        。title-right svg {
-            transition: fill var(--transition), transform var(--transition);
-        }
-        #buttonSearch svg {
-            fill: var(--text-secondary);
-        }
-        #buttonSearch:hover svg {
-            fill: var(--primary);
-            transform: scale(1.1);
-        }
-        #buttonRSS svg {
-            fill: var(--accent);
-        }
-        #buttonRSS:hover svg {
-            fill: #ff4757;
-            transform: scale(1.1);
-        }
-        #themeSwitch {
-            fill: var(--text-secondary);
-        }
-        。theme-switch-btn:hover #themeSwitch {
-            fill: var(--primary);
-            transform: scale(1.1);
-        }
-
-        /* 内容区样式 */
-        /* 博客描述文本 */
-        #content > div:first-child {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            line-height: 1.8;
-            text-align: center;
-            padding: 16px;
-            background-color: var(--bg-secondary);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* 文章列表容器 */
-        。SideNav {
-            min-width: auto;
-            border: 1px solid var(--border-primary);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow var(--transition);
-        }
-        .SideNav:hover {
-            box-shadow: var(--shadow);
-        }
-
-        /* 文章列表项 */
-        .SideNav-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-primary);
-            transition: all var(--transition);
-        }
-        .SideNav-item:last-child {
-            border-bottom: none;
-        }
-        .SideNav-item:hover {
-            background-color: var(--bg-secondary);
-            transform: translateX(0);
-            padding-left: 24px; /* hover时左移padding，模拟位移效果 */
-        }
-        .SideNav-item:hover .SideNav-icon {
-            color: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* 文章图标 */
-        .SideNav-icon {
-            margin-right: 16px;
-            color: var(--text-tertiary);
-            transition: all var(--transition);
-        }
-        .SideNav-icon octicon {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* 文章标题 */
-        .listTitle {
-            font-size: 17px;
-            font-weight: 500;
-            color: var(--text-primary);
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            max-width: 100%;
-            position: relative;
-        }
-        .listTitle:hover {
-            color: var(--primary);
-        }
-        /* 长标题hover提示 */
-        .listTitle:hover::after {
-            content: attr(title);
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-secondary);
-            border-radius: var(--radius-sm);
-            padding: 6px 12px;
-            font-size: 13px;
-            white-space: normal;
-            width: 280px;
-            z-index: 10;
-            box-shadow: var(--shadow);
-            color: var(--text-primary);
-        }
-
-        /* 标签组样式 */
-        .listLabels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-items: center;
-        }
-        .Label {
-            padding: 3px 10px;
-            border-radius: 16px; /* 胶囊形标签 */
-            font-size: 12px;
-            font-weight: 500;
-            color: #fff;
-            transition: all var(--transition-fast);
-        }
-        .Label:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-        /* 标签颜色优化（按分类统一） */
-        .LabelName[data-tag="documentation"] {
-            background-color: var(--primary);
-        }
-        .LabelName[data-tag="tech"] {
-            background-color: var(--success);
-        }
-        .LabelName[data-tag="life"] { /* 生活类标签颜色 */
-            background-color: var(--warning);
-        }
-        .LabelTime {
-            background-color: var(--text-tertiary) !important;
-            color: var(--bg-primary) !important;
-        }
-        /* 标签内链接样式 */
-        .LabelName a {
-            color: #fff !important;
-            display: inline-block;
-        }
-        .LabelName a:hover {
-            color: #fff !important;
-            transform: none;
-            text-decoration: underline;
-        }
-
-        /* 页脚样式 */
-        #footer {
-            margin-top: 80px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border-primary);
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-secondary);
-            position: relative;
-        }
-        /* 页脚装饰线 */
-        #footer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 3px;
-        }
-        #footer1 {
-            margin-bottom: 12px;
-            font-weight: 500;
-            font-size: 15px;
-        }
-        #footer2 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-        #runday {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        #runday::before {
-            content: "📅";
-            font-size: 16px;
-        }
-        #footer a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        #footer a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-
-        /* 回到顶部按钮 */
-        #backToTop {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            transition: all var(--transition);
-            opacity: 0;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-        #backToTop:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-        #backToTop svg {
-            width: 24px;
-            height: 24px;
-            transition: transform var(--transition);
-        }
-        #backToTop:hover svg {
-            transform: translateY(-2px);
-        }
-        /* 显示时的过渡 */
-        #backToTop.show {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        /* 骨架屏动画 */
-        @keyframes skeleton-loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* 响应式样式 - 平板 */
-        @media (max-width: 768px) {
-            body {
-                padding: 20px;
-                margin: 15px auto;
-            }
-
-            #header {
-                padding-bottom: 16px;
-                margin-bottom: 30px;
-            }
-
-            .avatar {
-                width: 60px;
-                height: 60px;
-            }
-
-            #header h1 a {
-                font-size: 32px;
-                margin-left: 12px;
-            }
-
-            .title-right {
-                gap: 4px;
-            }
-
-            .title-right button,
-            .title-right a {
-                width: 40px;
-                height: 40px;
-            }
-
-            #content > div:first-child {
-                font-size: 16px;
-                padding: 12px;
-                margin-bottom: 24px;
-            }
-
-            .SideNav-item {
-                padding: 14px 16px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .SideNav-item:hover {
-                padding-left: 18px;
-            }
-
-            .listLabels {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            #footer {
-                margin-top: 60px;
-                padding-top: 24px;
-            }
-
-            #footer2 {
-                gap: 12px;
-            }
-
-            #backToTop {
-                width: 44px;
-                height: 44px;
-                bottom: 30px;
-                right: 30px;
-            }
-        }
-
-        /* 响应式样式 - 手机 */
-        @media (max-width: 480px) {
-            body {
-                padding: 16px;
-            }
-
-            #header h1 a {
-                font-size: 28px;
-            }
-
-            .SideNav-item {
-                padding: 12px 14px;
-            }
-
-            .listTitle {
-                font-size: 16px;
-            }
-
-            .Label {
-                padding: 2px 8px;
-                font-size: 11px;
-            }
-        }
-    </style>
 </head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.avatar {transition: 0.8s;width:64px;height:64px;object-fit: cover;}
+.avatar:hover{transform: scale(1.15) rotate(360deg);}
+#header h1 a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-family:Monaco;margin-left:8px;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right button{margin-right:8px;padding:16px;}
+.title-right .circle{padding: 14px 16px;}
+
+.SideNav{min-width: 360px;}
+.SideNav-icon{margin-right: 16px}
+.SideNav-item .Label{color: #fff;margin-left:4px;}
+.d-flex{min-width:0;}
+.listTitle{overflow:hidden;white-space:nowrap;text-overflow: ellipsis;max-width: 100%;}
+.listLabels{white-space:nowrap;display:flex;}
+.listLabels object{max-height:16px;max-width:24px;}
+
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .avatar {width:40px;height:40px;}
+    .blogTitle{display:none;}
+    #buttonRSS{display:none;}
+    .LabelTime{display:none;}
+}
+</style>
+
+
 
 <body>
     <div id="header">
-        <h1>
-            <img src="https://github.githubassets.com/favicons/favicon.svg" class="avatar circle" id="avatarImg" alt="avatar">
-            <a class="blogTitle">观</a>
-        </h1>
-        <div class="title-right">
-            <a href="https://mouugw.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
-                <svg class="octicon" width="16" height="16" >
-                    <path id="pathSearch" fill-rule="evenodd"></path>
-                </svg>
-            </a>
-            
-            <a href="https://mouugw.github.io/rss.xml" target="_blank" id="buttonRSS" class="btn btn-invisible circle" title="RSS">
-                <svg class="octicon" width="16" height="16" >
-                    <path id="pathRSS" fill-rule="evenodd"></path>
-                </svg>
-            </a>
-            <a class="btn btn-invisible circle theme-switch-btn" onclick="modeSwitch()" title="切换主题">
-                <svg class="octicon" width="16" height="16" >
-                    <path id="themeSwitch" fill-rule="evenodd"></path>
-                </svg>
-            </a>
-        </div>
-    </div>
-
-    <div id="content">
-        <div>观 - 记录技术探索与生活思考，在沉淀中成长</div>
-        <nav class="SideNav border">
-            <a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/ji-yu-gmaeek-zai-GitHub-jian-li-wang-zhan.html">
-                <div class="d-flex flex-items-center">
-                    <svg class="SideNav-icon octicon" style="width:16px;height:16px">
-                        <path class="svgTop0" d=""></path>
-                    </svg>
-                    <span class="listTitle" title="基于gmaeek在GitHub建立网站">基于gmaeek在GitHub建立网站</span>
-                </div>
-                <div class="listLabels">
-                    <span class="Label LabelName" data-tag="documentation">
-                        <a style="color:#fff" href="tag.html#documentation">documentation</a>
-                    </span>
-                    <span class="Label LabelName" data-tag="tech">
-                        <a style="color:#fff" href="tag.html#tech">tech</a>
-                    </span>
-                    <span class="Label LabelTime">2025-11-20</span>
-                </div>
-            </a>
-            <a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/emmmm.html">
-                <div class="d-flex flex-items-center">
-                    <svg class="SideNav-icon octicon" style="width:16px;height:16px">
-                        <path class="svgTop0" d=""></path>
-                    </svg>
-                    <span class="listTitle" title="emmmm">emmmm</span>
-                </div>
-                <div class="listLabels">
-                    <span class="Label" style="background-color:#006b75">1</span>
-                    <span class="Label LabelName" data-tag="documentation">
-                        <a style="color:#fff" href="tag.html#documentation">documentation</a>
-                    </span>
-                    <span class="Label LabelTime">2025-11-20</span>
-                </div>
-            </a>
-            <a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/1.html">
-                <div class="d-flex flex-items-center">
-                    <svg class="SideNav-icon octicon" style="width:16px;height:16px">
-                        <path class="svgTop0" d=""></path>
-                    </svg>
-                    <span class="listTitle" title="1">1</span>
-                </div>
-                <div class="listLabels">
-                    <span class="Label LabelName" data-tag="documentation">
-                        <a style="color:#fff" href="tag.html#documentation">documentation</a>
-                    </span>
-                    <span class="Label LabelTime">2025-11-20</span>
-                </div>
-            </a>
-        </nav>
-    </div>
-
-    <div id="footer">
-        <div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://mouugw.github.io">观</a></div>
-        <div id="footer2">
-            <span id="runday"></span>
-            <span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
-        </div>
-    </div>
-
-    <!-- 回到顶部按钮 -->
-    <button id="backToTop">
-        <svg class="octicon" viewBox="0 0 16 16">
-            <path d="M7.707 14.707a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L5.414 9H13a1 1 0 1 1 0 2H5.414l2.293 2.293a1 1 0 0 1 0 1.414z" />
+<h1>
+    <img src="https://github.githubassets.com/favicons/favicon.svg" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">观</a></h1>
+<div class="title-right">
+    <a href="https://mouugw.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
+        <svg class="octicon" width="16" height="16" >
+            <path id="pathSearch" fill-rule="evenodd"></path>
         </svg>
-    </button>
+    </a>
+    
+    
+    <a href="https://mouugw.github.io/rss.xml" target="_blank" id="buttonRSS" class="btn btn-invisible circle" title="RSS">
+        <svg class="octicon" width="16" height="16" >
+            <path id="pathRSS" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    <a class="btn btn-invisible circle" onclick="modeSwitch()" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+</div>
+</div>
+    <div id="content">
+<div style="margin-bottom: 16px;">描述</div>
+<nav class="SideNav border">
+<a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/ji-yu-gmaeek-zai-GitHub-jian-li-wang-zhan.html">
+    <div class="d-flex flex-items-center">
+        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        </svg>
+        <span class="listTitle">基于gmaeek在GitHub建立网站</span>
+    </div>
+    <div class="listLabels">
+        
+        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span><span class="Label LabelName" style="background-color:#3fb3e5"><object><a style="color:#fff" href="tag.html#tech">tech</a></object></span>
+        <span class="Label LabelTime" style="background-color:#0969da">2025-11-20</span>
+    </div>
+</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/emmmm.html">
+    <div class="d-flex flex-items-center">
+        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        </svg>
+        <span class="listTitle">emmmm</span>
+    </div>
+    <div class="listLabels">
+        <span class="Label" style="background-color:#006b75">1</span>
+        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
+        <span class="Label LabelTime" style="background-color:#0969da">2025-11-20</span>
+    </div>
+</a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/1.html">
+    <div class="d-flex flex-items-center">
+        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        </svg>
+        <span class="listTitle">1</span>
+    </div>
+    <div class="listLabels">
+        
+        <span class="Label LabelName" style="background-color:#0075ca"><object><a style="color:#fff" href="tag.html#documentation">documentation</a></object></span>
+        <span class="Label LabelTime" style="background-color:#0969da">2025-11-20</span>
+    </div>
+</a>
+</nav>
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://mouugw.github.io">观</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
 
-    <script>
-        // 版权年份与运行时间
-        var now = new Date();
-        document.getElementById("copyrightYear").innerHTML = now.getFullYear();
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
 
-        if("" != ""){
-            var startSite = new Date("");
-            var diff = now.getTime() - startSite.getTime();
-            var diffDay = Math.floor(diff/(1000*60*60*24));
-            document.getElementById("runday").innerHTML = "网站运行"+diffDay+"天"+" • ";
-        }
-
-        // 图标列表
-        var IconList = {
-            'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z',
-            'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z',
-            'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z',
-            'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z',
-            'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z',
-            'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z',
-            'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z'
-        };
-        var utterancesLoad = 0;
-
-        // 主题设置
-        let themeSettings = {
-            "dark": ["dark","moon","#00f0ff","dark-blue"],
-            "light": ["light","sun","#ff5000","github-light"],
-            "auto": ["auto","sync","","preferred-color-scheme"]
-        };
-
-        // 初始化主题（自动适配系统）
-        let theme = localStorage.getItem("meek_theme");
-        if (!theme) {
-            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-            localStorage。setItem("meek_theme"， theme);
-        }
-        document。documentElement。setAttribute("data-color-mode"， theme);
-
-        // 切换主题函数
-        function changeTheme(mode, icon, color, utheme){
-            document。documentElement。setAttribute("data-color-mode"， mode);
-            document。getElementById("themeSwitch")。setAttribute("d"， IconList[icon]);
-            document。getElementById("themeSwitch")。parentNode。style。color = color;
-            if(utterancesLoad == 1){utterancesTheme(utheme);}
-        }
-
-        function modeSwitch(){
-            let currentMode = document。documentElement。getAttribute('data-color-mode');
-            let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
-            localStorage。setItem("meek_theme"， newMode);
-            if(themeSettings[newMode]){
-                changeTheme(...themeSettings[newMode]);
-            }
-        }
-
-        function utterancesTheme(theme){
-            const message = {type:'set-theme',theme: theme};
-            const iframe = document.getElementsByClassName('utterances-frame')[0];
-            iframe。contentWindow。postMessage(message，'https://utteranc.es');
-        }
-
-        // 应用当前主题
-        if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-
-        // 初始化图标
-        document。getElementById("pathSearch")。setAttribute("d"， IconList["search"]);
-        document。getElementById("pathRSS")。setAttribute("d"， IconList["rss"]);
-        const iconPost = document。getElementsByClassName("svgTop0");
-
-        // 文章列表图标
-        for(var i=0; i<iconPost.length; i++){
-            iconPost[i]。setAttribute("d"， IconList["post"]);
-        }
-
-        // 回到顶部功能
-        const backToTopBtn = document.getElementById("backToTop");
-        window。addEventListener("scroll"， () => {
-            if (window。scrollY > 300) {
-                backToTopBtn。classList。add("show");
-            } else {
-                backToTopBtn。classList。remove("show");
-            }
-        });
-        backToTopBtn。addEventListener("click"， () => {
-            window。scrollTo({ top: 0， behavior: "smooth" });
-        });
-
-        // 控制台信息
-        console。log("\n %c Gmeek 美化版 - 基于 Meekdai/Gmeek \n","padding:5px 0;background:#0969da;color:#fff");
-    </script>
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
 </body>
-</html>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'search': 'M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z', 'rss': 'M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098 10.502 10.502 0 0 0-9.776-9.776.747.747 0 0 1-.7-.798ZM2.84 7.05h-.002a7.002 7.002 0 0 1 6.113 6.111.75.75 0 0 1-1.49.178 5.503 5.503 0 0 0-4.8-4.8.75.75 0 0 1 .179-1.489ZM2 13a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z', 'upload': 'M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z M11.78 4.72a.749.749 0 1 1-1.06 1.06L8.75 3.811V9.5a.75.75 0 0 1-1.5 0V3.811L5.28 5.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z', 'post': 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM3.5 6.25a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75Zm.75 2.25h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1 0-1.5Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathSearch").setAttribute("d",IconList["search"]);
+document.getElementById("pathRSS").setAttribute("d",IconList["rss"]);
+iconTOP=document.getElementsByClassName("svgTop1");
+iconPost=document.getElementsByClassName("svgTop0");
+for(var i=0;i<iconTOP.length;i++){
+    iconTOP[i].setAttribute("d",IconList["upload"]);
+    iconTOP[i].parentNode.style.color="red";
+}
+for(var i=0;i<iconPost.length;i++){
+    iconPost[i].setAttribute("d",IconList["post"]);
+}
+
+
+
+
+</script>
+
 
 </html>
