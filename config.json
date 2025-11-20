@@ -1,10 +1,4 @@
-{
-    "title": "观",
-    "subTitle": "描述",
-    "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
-    "GMEEK_VERSION": "last",
-    "i18n": "CN",
-    "indexStyle":"module.exports = {
+module.exports = {
   // 其他配置不变...
   indexStyle: `
     /* 浅色模式背景图 */
@@ -35,6 +29,13 @@
       background-color: rgba(4, 120, 87, 0.9) !important;
     }
   `,
-};"
+};
+{
+    "title": "观",
+    "subTitle": "描述",
+    "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
+    "GMEEK_VERSION": "last",
+    "i18n": "CN",
+    "indexStyle":""
     "indexScript":""
 }
