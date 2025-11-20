@@ -5,5 +5,5 @@
     "GMEEK_VERSION": "v1.6.0",
     "i18n": "CN",
     "customCss": ""，
-    "indexStyle": "@import url('https://raw.githubusercontent.com/mouugw/mouugw.github.io/main/assets/css/index-custom.css') !important;"
+    "indexStyle": "@import url('https://raw.githubusercontent.com/mouugw/mouugw.github.io/main/index-custom.css') !important;"
 }
