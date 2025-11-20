@@ -1,0 +1,83 @@
+/* 首页二次元背景 + 个性化样式 */
+:root {
+  --light-content: rgba(255,255,255,0.92);
+  --dark-content: rgba(15,23,42,0.92);
+  --primary: #2563eb;
+}
+
+/* 二次元背景图（适配明暗主题） */
+[data-color-mode="light"] body {
+  background-image: url('https://haowallpaper.com/link/common/file/previewFileImg/15758358777205056') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-blend-mode: overlay !important;
+  background-color: #f8fafc !important;
+}
+
+[data-color-mode="dark"] body {
+  background-image: url('https://haowallpaper.com/link/common/file/previewFileImg/15758358777205056') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-blend-mode: overlay !important;
+  background-color: #0f172a !important;
+}
+
+/* 毛玻璃核心区域 */
+#header, #content, #footer {
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+}
+
+#header {
+  background-color: var(--light-content) !important;
+  padding: 20px !important;
+}
+[data-color-mode="dark"] #header {
+  background-color: var(--dark-content) !important;
+}
+
+#content {
+  background-color: var(--light-content) !important;
+  padding: 24px !important;
+  margin-bottom: 24px !important;
+}
+[data-color-mode="dark"] #content {
+  background-color: var(--dark-content) !important;
+}
+
+#footer {
+  background-color: var(--light-content) !important;
+  padding: 16px !important;
+  color: #64748b !important;
+}
+[data-color-mode="dark"] #footer {
+  background-color: var(--dark-content) !important;
+  color: #94a3b8 !important;
+}
+
+/* 文章列表优化 */
+.SideNav-item {
+  border-radius: 8px !important;
+  padding: 15px !important;
+  margin: 10px 0 !important;
+  background-color: rgba(255,255,255,0.88) !important;
+  transition: all 0.3s ease !important;
+}
+[data-color-mode="dark"] .SideNav-item {
+  background-color: rgba(30,41,59,0.88) !important;
+}
+.SideNav-item:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(37,99,235,0.15) !important;
+}
+
+/* 文章标题样式 */
+.listTitle {
+  font-size: 18px !important;
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}
