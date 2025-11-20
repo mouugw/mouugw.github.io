@@ -4,6 +4,6 @@
     "avatarUrl": "https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION": "v1.6.0",
     "i18n": "CN",
-    "customCss": ""，
+    "customCss": "",
     "indexStyle": "@import url('https://raw.githubusercontent.com/mouugw/mouugw.github.io/main/index-custom.css') !important;"
 }
