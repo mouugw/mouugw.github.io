@@ -15,6 +15,7 @@ https://github.com/Meekdai/Gmeek
 
 <img width="1576" height="600" alt="Image" src="https://github.com/user-attachments/assets/1dde643d-86b1-4f67-89ab-23b6878abb2c" />
 **简单修改**
+
 修改config文件,在action处,build Gmeek处,运行工作流程处,运行工作流程.
 即可完成修改相关配置.
 
