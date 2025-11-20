@@ -1,35 +1,3 @@
-module.exports = {
-  // 其他配置不变...
-  indexStyle: `
-    /* 浅色模式背景图 */
-    [data-color-mode="light"] body {
-      background-image: url("https://你的图片链接/light-bg.jpg") !important;
-      background-size: cover !important;       /* 图片自适应容器 */
-      background-repeat: no-repeat !important; /* 不重复平铺 */
-      background-attachment: fixed !important; /* 滚动时背景固定 */
-      background-position: center !important;  /* 图片居中 */
-      background-color: #f0fdf4 !important;    /* 图片加载失败时的备用色（浅绿） */
-    }
-
-    /* 深色模式背景图 */
-    [data-color-mode="dark"] body {
-      background-image: url("https://你的图片链接/dark-bg.jpg") !important;
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
-      background-attachment: fixed !important;
-      background-position: center !important;
-      background-color: #065f46 !important;    /* 图片加载失败时的备用色（深绿） */
-    }
-
-    /* 可选：让容器半透明，透出背景图 */
-    #header, #content, #footer {
-      background-color: rgba(220, 252, 231, 0.9) !important;
-    }
-    [data-color-mode="dark"] #header, [data-color-mode="dark"] #content, [data-color-mode="dark"] #footer {
-      background-color: rgba(4, 120, 87, 0.9) !important;
-    }
-  `,
-};
 {
     "title": "观",
     "subTitle": "描述",
